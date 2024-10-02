@@ -22,4 +22,12 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
 
+app.get("/retrieve-payment-intent/:paymentId", async (req, res) => {
+  const paymentIntent = await stripe.paymentIntents.retrieve(
+    req.params.paymentId,
+  );
+
+  res.send(paymentIntent);
+});
+
 module.exports.handler = serverless(app);
