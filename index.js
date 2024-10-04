@@ -30,4 +30,12 @@ app.get("/retrieve-payment-intent/:paymentId", async (req, res) => {
   res.send(paymentIntent);
 });
 
+app.get("/cancel-payment-intent/:paymentId", async (req, res) => {
+  const paymentIntent = await stripe.paymentIntents.cancel(
+    req.params.paymentId,
+  );
+
+  res.send(paymentIntent);
+});
+
 module.exports.handler = serverless(app);
